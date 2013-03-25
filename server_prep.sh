@@ -4,17 +4,19 @@ copy_ssh_keys="false"
 do_upgrade="false"
 server=""
 
+USAGE="Usage: -c (copy_ssh_keys) -u (do_upgrade) -e (user@server)"
+
+if [ $# -le 1 ]
+then
+    echo "$USAGE"
+    exit 1
+fi
+
 while getopts cue: opt; do
   case $opt in
-  c)
-      copy_ssh_keys="true"
-      ;;
-  u)
-      do_upgrade="true"
-      ;;
-  e)
-      server=$OPTARG
-      ;;
+  c) copy_ssh_keys="true" ;;
+  u) do_upgrade="true" ;;
+  e) server=$OPTARG ;;
   esac
 done
 
